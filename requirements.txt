@@ -4,3 +4,7 @@ pytz==2020.5
 sqlparse==0.4.4
 ruff
 coverage
+pandas
+matplotlib
+pytest
+playwright
