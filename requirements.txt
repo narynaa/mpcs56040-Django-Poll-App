@@ -8,3 +8,4 @@ pandas
 matplotlib
 pytest
 playwright
+pytest-playwright

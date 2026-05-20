@@ -30,3 +30,12 @@ To install dependencies and enable running the later tests locally, follow these
 
 - Repeat the same steps for the spike test
 - Run `k6 run --summary-trend-stats="avg,p(95),p(99)" --out json=spike_results.json spike_test.js` and plot the results using the same command as above
+
+## Running Q5 tests
+> Note: no separate framework configuration is needed with my test setup.
+- Run `python3 -m playwright install` to make sure that playwright downloads all the data in needs
+- Start your server by running `python3 manage.py runserver`
+> Note: similar to Q4, these instructions assume that you already ran setup commands (needed only once). If you haven't, refer to the Q4 instructions for how to do setup.
+
+- Run `ADMIN_USERNAME=your_username ADMIN_PASSWORD=your_password python3 -m pytest playwright_tests.py --headed --tracing=on`,
+where `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the username and password you setup when running Q2/Q4 tests.
