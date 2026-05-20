@@ -39,3 +39,9 @@ To install dependencies and enable running the later tests locally, follow these
 
 - Run `ADMIN_USERNAME=your_username ADMIN_PASSWORD=your_password python3 -m pytest playwright_tests.py --headed --tracing=on`,
 where `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the username and password you setup when running Q2/Q4 tests.
+
+## Running Q7 tests
+- Test file: polls/integration_tests.py
+- To run the first test: `python manage.py test polls.integration_tests.PollIntegrationTests.test_authenticated_user_can_vote_and_vote_is_saved`
+- To run the second test: `python manage.py test polls.integration_tests.PollIntegrationTests.test_poll_list_view_renders_poll_title_in_template`
+- To run both tests: `python manage.py test polls.integration_tests.PollIntegrationTests`
