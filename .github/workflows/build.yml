@@ -73,4 +73,4 @@ jobs:
           ADMIN_USERNAME: ${{ env.ADMIN_USERNAME }}
           ADMIN_PASSWORD: ${{ env.ADMIN_PASSWORD }}
         run: |
-          python3 -m pytest playwright_tests.py --headed
+          python3 -m pytest playwright_tests.py
