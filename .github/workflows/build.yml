@@ -42,7 +42,7 @@ jobs:
       - name: Q7 - Run integration tests
         run: python manage.py test polls.integration_tests.PollIntegrationTests
 
-      - name: Prepare database and admin user
+      - name: Prepare database and super user
         env:
           DJANGO_SUPERUSER_USERNAME: ${{ env.ADMIN_USERNAME }}
           DJANGO_SUPERUSER_PASSWORD: ${{ env.ADMIN_PASSWORD }}
