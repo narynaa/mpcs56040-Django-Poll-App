@@ -1,0 +1,76 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Q1 - Ruff check
+        run: ruff check .
+
+      - name: Q3 - Run unit tests
+        run: python3 manage.py test polls.tests
+
+      - name: Q7 - Run integration tests
+        run: python manage.py test polls.integration_tests.PollIntegrationTests
+
+      - name: Prepare database and admin user
+        env:
+          DJANGO_SUPERUSER_USERNAME: ${{ env.ADMIN_USERNAME }}
+          DJANGO_SUPERUSER_PASSWORD: ${{ env.ADMIN_PASSWORD }}
+          DJANGO_SUPERUSER_EMAIL: ${{ env.ADMIN_EMAIL }}
+        run: |
+          python3 manage.py migrate
+          python3 manage.py createsuperuser --noinput || true
+
+      - name: Start Django server
+        run: |
+          python3 manage.py runserver 0.0.0.0:8000 &
+          sleep 5
+
+      - name: Create test users
+        run: python3 create_test_users.py
+
+      - name: Q4 - Run k6 load test
+        run: k6 run --summary-trend-stats="avg,p(95),p(99)" load_test.js
+
+      - name: Q4 - Run k6 spike test
+        run: k6 run --summary-trend-stats="avg,p(95),p(99)" spike_test.js
+
+      - name: Install Playwright browsers
+        run: python3 -m playwright install
+
+      - name: Q5 - Run Playwright tests
+        env:
+          ADMIN_USERNAME: ${{ env.ADMIN_USERNAME }}
+          ADMIN_PASSWORD: ${{ env.ADMIN_PASSWORD }}
+        run: |
+          python3 -m pytest playwright_tests.py --headed
