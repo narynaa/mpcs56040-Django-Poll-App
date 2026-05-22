@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import Choice, Poll, Vote
+from .models import Poll, Choice, Vote
 
 
 class ChoiceInline(admin.TabularInline):  # or admin.StackedInline for a different layout

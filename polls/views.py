@@ -1,12 +1,11 @@
-from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.contrib import messages
+from .models import Poll, Choice, Vote
+from .forms import PollAddForm, EditPollForm, ChoiceAddForm
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
-
-from .forms import ChoiceAddForm, EditPollForm, PollAddForm
-from .models import Choice, Poll, Vote
 
 
 @login_required()

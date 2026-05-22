@@ -1,6 +1,5 @@
 import os
 import time
-
 import pytest
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pollme.settings")
@@ -11,8 +10,7 @@ import django
 django.setup()
 
 from django.contrib.auth.models import User
-
-from polls.models import Choice, Poll, Vote
+from polls.models import Poll, Choice, Vote
 
 BASE_URL = "http://127.0.0.1:8000"
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")

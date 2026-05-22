@@ -5,8 +5,4 @@ target-version = "py38"
 exclude = [".git", "__pycache__", "migrations", "venv", ".venv"]
 
 [tool.ruff.lint]
-select = [
-    "F401", # unused imports
-    "F841", # unused variables
-    "I",    # import sorting
-]
+select = ["E", "F", "I", "B", "UP"]

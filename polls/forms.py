@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Choice, Poll
+from .models import Poll, Choice
 
 
 class PollAddForm(forms.ModelForm):
