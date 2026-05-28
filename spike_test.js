@@ -13,6 +13,10 @@ export const options = {
     ],
 };
 
+// this was annoying, there's probably a better way to write this regex
+// i'm comfortable with regexes in python but not in javascript, so tthis is
+// an adaptation of a python regex to work in javascript based on the references
+// i consulted (see my README)
 function getCsrf(html) {
     const match = html.match(/name="csrfmiddlewaretoken" value="([^"]+)"/);
     return match ? match[1] : "";

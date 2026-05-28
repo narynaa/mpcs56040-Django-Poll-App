@@ -1,7 +1,7 @@
 ## Code changes & Setup
 The only code changes made to the existing application code were adding the following ones:
 - Two new dependecies to the `requirements.txt` file
-- Existing unit tests from polls/tests.py were renamed to polls/tests_legacy.py (to avoid name collision with my new unit tests)
+- Existing unit tests from `polls/tests.py` were renamed to `polls/tests_legacy.py` (to avoid name collision with my new unit tests)
 - `.coverage` was added to `.gitignore`
 
 These changes do not modify the application logic in any way. All of them can be verified by looking at the commit history if needed.
@@ -45,3 +45,39 @@ where `ADMIN_USERNAME` and `ADMIN_PASSWORD` are the username and password you se
 - To run the first test: `python manage.py test polls.integration_tests.PollIntegrationTests.test_authenticated_user_can_vote_and_vote_is_saved`
 - To run the second test: `python manage.py test polls.integration_tests.PollIntegrationTests.test_poll_list_view_renders_poll_title_in_template`
 - To run both tests: `python manage.py test polls.integration_tests.PollIntegrationTests`
+
+## References
+> Note: I tried to sort by question where possible, but some references apply across multiple questions
+
+Intro resource (I used it to better understand setup commands to run the server etc, used in multiple questions):
+- [Django polling/voting app architecture examples] https://docs.djangoproject.com/en/stable/intro/tutorial01/
+- Q1
+    - [ruff linting rules] https://docs.astral.sh/ruff/linter/
+    - [isort conventions for import ordering] https://isort.readthedocs.io/en/latest/
+- Q3
+    - [unittest.mock patch()] https://docs.python.org/3/library/unittest.mock.html#unittest.mock.patch
+    - [unittest.mock MagicMock] https://docs.python.org/3/library/unittest.mock.html#unittest.mock.MagicMock
+    - [Django testing] https://docs.djangoproject.com/en/6.0/topics/testing/tools/
+    - [django RequestFactory] https://docs.djangoproject.com/en/6.0/topics/testing/advanced/#django.test.RequestFactory
+    - [django TestCase] https://docs.djangoproject.com/en/6.0/topics/testing/tools/#django.test.TestCase
+    - [django authentication] https://docs.djangoproject.com/en/6.0/ref/contrib/auth/
+    - [Django auth User model usage] https://docs.djangoproject.com/en/stable/topics/auth/default/
+- Q4
+    - [JS regex] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences
+    - [django csrfmiddlewaretoken] https://docs.djangoproject.com/en/6.0/ref/csrf/
+    - [k6 spike tests] https://grafana.com/docs/k6/latest/testing-guides/test-types/spike-testing/
+    - [k6 load tests] https://grafana.com/docs/k6/latest/testing-guides/test-types/load-testing/
+    - [pandas resampling] https://pandas.pydata.org/docs/reference/api/pandas.api.typing.DataFrameGroupBy.resample.html#pandas.api.typing.DataFrameGroupBy.resample
+    - [pandas aggregation] https://pandas.pydata.org/docs/reference/api/pandas.api.typing.DataFrameGroupBy.agg.html#pandas.api.typing.DataFrameGroupBy.agg
+    - [plotting refresher] https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot
+    - [plot layout] https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.tight_layout.html#matplotlib.pyplot.tight_layout
+- Q5
+    - [prepping env variables for django] https://medium.com/python-in-my-pajamas/using-os-environ-to-manage-your-django-settings-the-easy-way-d2db96e73ab9
+    - [playwright interactions with html forms] https://playwright.dev/python/docs/input
+    - [page API and how to access different elements with playwright] https://playwright.dev/python/docs/writing-tests
+- Q7
+    - References here are generally similar to Q3 + plus this one:
+    - [django reverse url handling] https://docs.djangoproject.com/en/6.0/ref/urlresolvers/#reverse
+- Q9
+    - [workflow jobs syntax and examples] https://runs-on.com/github-actions/jobs-and-steps/
+    - [using secrets in workflow envs] https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
